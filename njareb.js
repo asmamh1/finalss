@@ -138,3 +138,60 @@ document.getElementById('submit-btn').addEventListener('click', function() {
         }, 500);
     }, 5000);
 });
+
+
+
+
+document.getElementById('card-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const form = this;
+    const submitBtn = document.getElementById('submit-payment');
+    const notification = document.getElementById('payment-notification');
+    const originalBtnText = submitBtn.innerHTML;
+
+    // 1. Phase "Terminé..." (4 secondes)
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Terminé...';
+    
+    // 2. Après 4 secondes, afficher le succès
+    setTimeout(() => {
+        // Envoyer les données (simulé ici)
+        fetch('paiement.php', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Erreur serveur');
+            return response.json();
+        })
+        .then(data => {
+            // Afficher la notification
+            notification.classList.remove('hidden');
+            
+            // Cacher après 3 secondes
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+            
+            // Réinitialiser le formulaire
+            form.reset();
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            notification.querySelector('.notification-message').textContent = "Terminé avec succès";
+            notification.classList.remove('hidden');
+            
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        });
+    }, 4000); // Délai de 4 secondes
+});

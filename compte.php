@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
         <link rel="stylesheet" href="compte.css">
         <link rel="stylesheet" href="njareb.css">
         <link rel="stylesheet" href="id.css">
+        <link rel="stylesheet" href="id.css">
     </head>
     <body>
         <button class="menu-toggle" id="menuToggle">
@@ -190,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
                     <?php endif; ?>
                 </div>
                 <div class="table-actions">
-                    <a href="service omra.php"><button>Retour </button></a>
+                    <a href="compte.php"><button>Retour </button></a>
                     <a href="tableau.php?action=vider"><button class="danger">Vider le tableau</button></a>
                 </div>
             </section>
@@ -199,53 +200,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
                 <button id="add-card-btn" class="payment-method-btn"><i class="far fa-credit-card"></i> Carte Bancaire</button>
                 <button id="add-paypal-btn" class="payment-method-btn"><i class="fab fa-paypal"></i> PayPal</button>
             </div>
-            <div id="card-form-container" class="hidden">
-                <form id="card-form" method="POST" action="paiement.php">
-                <h2><i class="fas fa-credit-card"></i> Informations de Carte</h2>
-                <div class="form-group">
-                    <label for="card-name">Nom sur la carte</label>
-                    <input type="text" id="card-name" name="card_name" placeholder="John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="card-number">Numéro de carte</label>
-                    <div class="input-with-icon">
-                        <i class="far fa-credit-card"></i>
-                        <input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456" required maxlength="19">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="card-expiry">Date d'expiration</label>
-                        <input type="text" id="card-expiry" name="card_expiry" placeholder="MM/AA" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="card-cvv">CVV</label>
-                        <div class="input-with-icon">
-                            <i class="fas fa-lock"></i>
-                            <input type="text" id="card-cvv" name="card_cvv" placeholder="123" required maxlength="4">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-check"></i> Terminé
-                </button>
-                </form>
+            <div id="card-form-container">
+    <form id="card-form" method="POST" action="paiement.php">
+        <h2><i class="fas fa-credit-card"></i> Informations de Carte</h2>
+        <div class="form-group">
+            <label for="card-name">Nom sur la carte</label>
+            <input type="text" id="card-name" name="card_name" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+            <label for="card-number">Numéro de carte</label>
+            <div class="input-with-icon">
+                <i class="far fa-credit-card"></i>
+                <input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456" required maxlength="19">
             </div>
-            <div id="payment-notification" class="payment-notification hidden">
-                <div class="payment-notification-content">
-                    <i class="fas fa-check-circle"></i>
-                    <div>
-                        <h3>Paiement réussi !</h3>
-                        <p class="payment-notification-text"></p>
-                    </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="card-expiry">Date d'expiration</label>
+                <input type="text" id="card-expiry" name="card_expiry" placeholder="MM/AA" required>
+            </div>
+            <div class="form-group">
+                <label for="card-cvv">CVV</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="text" id="card-cvv" name="card_cvv" placeholder="123" required maxlength="4">
                 </div>
             </div>
-            <div id="payment-notification" class="payment-notification">
-                <div class="payment-notification-content">
-                    <i class="fas fa-check-circle"></i>
-                    <span class="payment-notification-text"></span>
-                </div>
-            </div>
+        </div>
+        <button type="submit" class="submit-btn" id="submit-payment">
+            <i class="fas fa-check"></i> Terminé
+        </button>
+    </form>
+</div>
+
+
             <div id="success-message1" class="hidden"></div>
             
         </section>
